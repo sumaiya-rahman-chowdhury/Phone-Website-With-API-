@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone Ecommerce</title>
+    <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header><h1 class="text-5xl font-bold mb-4 text-center">Phone Paradise</h1></header>
+    <main>
+        <section class="bg-gray-100 p-4 m-4 mb-9 flex">
+            <input id="srch-field" type="text" placeholder="Search here" class=" input-bordered w-full max-w-xs px-5 py-2 rounded focus:outline-none rounded-r-none" />
+            <button onclick="handleSearch()" class="px-5 py-2 bg-orange-400 rounded rounded-l-none">Search</button>
+        </section>
+        <section class="mx-auto w-11/12">
+            <div id="phn-contyner" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-center items-center">
+                
+            </div>
+        </section >
+    </main>
+
+    <script src="js/phone.js"></script>
+  </body>
+</html>

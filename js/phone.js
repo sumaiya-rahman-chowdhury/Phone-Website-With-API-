@@ -1,5 +1,5 @@
 
-const loadPhone = async (searchTxt,isShhowAll) =>{
+const loadPhone = async (searchTxt='Iphone',isShhowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchTxt}`);
     const data = await res.json();
     const phones = data.data ;
@@ -13,7 +13,7 @@ const displayPhones = (phones,isShhowAll) =>{
     const phnContainer = document.getElementById('phn-contyner');
     phnContainer.textContent = " "
 
-    console.log(phones.length)
+    // console.log(phones.length)
     if(phones.length>5 && !isShhowAll){
       shwAll.classList.remove('hidden');
     }
@@ -45,14 +45,6 @@ const displayPhones = (phones,isShhowAll) =>{
 
     toggleLoadingSpinner(false);
 }
-const handleShowDetails =async (id) =>{
-  console.log(id);
-  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
-  const data = res.json();
-  console.log(data)
-}
-
-
 
 const handleSearch = (isShhowAll) =>{
     // console.log("object")
@@ -76,4 +68,46 @@ const toggleLoadingSpinner = (isLoading) =>{
 
 const handleShowAll = () =>{
   handleSearch(true);
+}
+const handleShowDetails =async (id) =>{
+  // console.log(id);
+  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+  const data =await res.json();
+  const phone = data.data ;
+  console.log(phone)
+  showPhoneDetails(phone)
+}
+
+
+
+const showPhoneDetails = (phone) =>{
+  const phoneName = document.getElementById('phone-name');
+ phoneName.innerText = phone.name ;
+ const showDetailsCont = document.getElementById('show-details-container');
+ showDetailsCont.innerHTML = `<div class=" flex flex-col items-center"><img src="${phone.image}" alt="" </div>
+ <div class="mt-5"><p class="text-justify"><span class="font-bold">Storage: </span>${phone?.mainFeatures?.storage}</p>
+ <p><span class="font-bold">Display Size: </span>${phone?.mainFeatures?.displaySize}</p>
+ <p><span class="font-bold">ChipSet: </span>${phone?.mainFeatures?.chipSet}</p>
+ <p><span class="font-bold">Slug: </span>${phone?.mainFeatures?.slug}</p>
+ <p><span class="font-bold">Release Date: </span>${phone?.mainFeatures?.releaseDate}</p>
+ <p><span class="font-bold">Brand: </span>${phone?.brand}</p>
+ <p><span class="font-bold">GPS: </span>${phone?.GPS}</p></div>
+ `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  my_modal_5.showModal()
 }

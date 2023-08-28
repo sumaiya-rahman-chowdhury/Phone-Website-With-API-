@@ -1,26 +1,28 @@
 
-const loadPhone = async (searchTxt) =>{
+const loadPhone = async (searchTxt,isShhowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchTxt}`);
     const data = await res.json();
     const phones = data.data ;
     console.log(phones)
-    displayPhones(phones)
+    displayPhones(phones,isShhowAll)
 }
 loadPhone()
-const displayPhones = phones =>{
+const displayPhones = (phones,isShhowAll) =>{
     console.log(phones);
     const shwAll = document.getElementById('btn-show-all');
     const phnContainer = document.getElementById('phn-contyner');
     phnContainer.textContent = " "
 
     console.log(phones.length)
-    if(phones.length>5){
+    if(phones.length>5 && !isShhowAll){
       shwAll.classList.remove('hidden');
     }
     else{
       shwAll.classList.add('hidden')
     }
-    phones = phones.slice(0,5);
+    if(!isShhowAll){
+      phones = phones.slice(0,5);
+    }
     phones.forEach(phone =>{
         console.log(phone);
         const phnCard = document.createElement('div');
@@ -47,13 +49,13 @@ const displayPhones = phones =>{
 
 
 
-const handleSearch = () =>{
+const handleSearch = (isShhowAll) =>{
     // console.log("object")
     toggleLoadingSpinner(true)
     const srchField = document.getElementById('srch-field');
     const srchTxt = srchField.value ;
     console.log(srchTxt);
-    loadPhone(srchTxt)
+    loadPhone(srchTxt,isShhowAll)
 }
 const toggleLoadingSpinner = (isLoading) =>{
   const loadingSpinner = document.getElementById('loading-spinner');
@@ -64,4 +66,9 @@ const toggleLoadingSpinner = (isLoading) =>{
     loadingSpinner.classList.add('hidden')
   }
   
+}
+
+
+const handleShowAll = () =>{
+  handleSearch(true);
 }

@@ -9,8 +9,18 @@ const loadPhone = async (searchTxt) =>{
 loadPhone()
 const displayPhones = phones =>{
     console.log(phones);
+    const shwAll = document.getElementById('btn-show-all');
     const phnContainer = document.getElementById('phn-contyner');
     phnContainer.textContent = " "
+
+    console.log(phones.length)
+    if(phones.length>5){
+      shwAll.classList.remove('hidden');
+    }
+    else{
+      shwAll.classList.add('hidden')
+    }
+    phones = phones.slice(0,5);
     phones.forEach(phone =>{
         console.log(phone);
         const phnCard = document.createElement('div');
@@ -29,7 +39,9 @@ const displayPhones = phones =>{
       </div>
         `
         phnContainer.appendChild(phnCard);
-    })
+    });
+
+    toggleLoadingSpinner(false);
 }
 
 
@@ -37,8 +49,19 @@ const displayPhones = phones =>{
 
 const handleSearch = () =>{
     // console.log("object")
+    toggleLoadingSpinner(true)
     const srchField = document.getElementById('srch-field');
     const srchTxt = srchField.value ;
     console.log(srchTxt);
     loadPhone(srchTxt)
+}
+const toggleLoadingSpinner = (isLoading) =>{
+  const loadingSpinner = document.getElementById('loading-spinner');
+  if(isLoading){
+    loadingSpinner.classList.remove('hidden');
+  }
+  else{
+    loadingSpinner.classList.add('hidden')
+  }
+  
 }

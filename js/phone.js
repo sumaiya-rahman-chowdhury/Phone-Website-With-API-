@@ -3,12 +3,12 @@ const loadPhone = async (searchTxt,isShhowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchTxt}`);
     const data = await res.json();
     const phones = data.data ;
-    console.log(phones)
+    // console.log(phones)
     displayPhones(phones,isShhowAll)
 }
 loadPhone()
 const displayPhones = (phones,isShhowAll) =>{
-    console.log(phones);
+    // console.log(phones);
     const shwAll = document.getElementById('btn-show-all');
     const phnContainer = document.getElementById('phn-contyner');
     phnContainer.textContent = " "
@@ -24,7 +24,7 @@ const displayPhones = (phones,isShhowAll) =>{
       phones = phones.slice(0,5);
     }
     phones.forEach(phone =>{
-        console.log(phone);
+        // console.log(phone);
         const phnCard = document.createElement('div');
         phnCard.classList = `card w-auto bg-base-100 shadow-xl` ;
         phnCard.innerHTML = `
@@ -36,7 +36,7 @@ const displayPhones = (phones,isShhowAll) =>{
         }</h2>
         <p class="font-semibold">$300.00</p>
         <div class="card-actions">
-          <button class="px-[22px] py-[8px] font-bold mt-4">Buy Now</button>
+          <button onclick="handleShowDetails('${phone.slug}')" class="px-[22px] py-[8px] font-bold mt-4 ">Show Details</button>
         </div>
       </div>
         `
@@ -45,7 +45,12 @@ const displayPhones = (phones,isShhowAll) =>{
 
     toggleLoadingSpinner(false);
 }
-
+const handleShowDetails =async (id) =>{
+  console.log(id);
+  const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
+  const data = res.json();
+  console.log(data)
+}
 
 
 
